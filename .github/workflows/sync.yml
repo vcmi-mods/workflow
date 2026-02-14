@@ -1,0 +1,30 @@
+name: Workflow Sync
+
+on:
+  push:
+    branches:
+      - master
+env:
+  DRY_RUN: false
+  REPOSITORIES: |
+    vcmi-mods/horn-of-the-abyss@vcmi-1.7
+    vcmi-mods/tides-of-war@vcmi-1.7
+  
+  WORKFLOW_FILES: |
+    .github=./
+
+jobs:
+  Github_Workflow_Sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetching Local Repository
+        uses: actions/checkout@master
+
+      - name: Running Workflow Sync
+        uses: varunsridharan/action-github-workflow-sync@main
+        with:
+          DRY_RUN: ${{ env.DRY_RUN }}
+          REPOSITORIES: ${{ env.REPOSITORIES }}
+          WORKFLOW_FILES: ${{ env.WORKFLOW_FILES }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          COMMIT_MESSAGE: "Automated synchronization of Github workflows"
