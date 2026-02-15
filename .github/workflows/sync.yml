@@ -9,6 +9,10 @@ env:
   REPOSITORIES: |
     vcmi-mods/horn-of-the-abyss@vcmi-1.7
     vcmi-mods/tides-of-war@vcmi-1.7
+    vcmi-mods/wake-of-gods@vcmi-1.7
+    vcmi-mods/HD-remastered@vcmi-1.7
+    vcmi-mods/small-era-mods@vcmi-1.7
+    vcmi-mods/czech-translation@vcmi-1.7
   
   WORKFLOW_FILES: |
     .github=./
