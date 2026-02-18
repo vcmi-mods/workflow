@@ -13,7 +13,7 @@ env:
     vcmi-mods/HD-remastered@vcmi-1.7
     vcmi-mods/small-era-mods@vcmi-1.7
     vcmi-mods/czech-translation@vcmi-1.7
-    vcmi-mods/tears-of-ashan@vcmi1.7
+    vcmi-mods/tears-of-ashan@vcmi-1.7
   
   WORKFLOW_FILES: |
     .github=./
