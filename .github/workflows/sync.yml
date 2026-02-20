@@ -14,6 +14,9 @@ env:
     vcmi-mods/small-era-mods@vcmi-1.7
     vcmi-mods/czech-translation@vcmi-1.7
     vcmi-mods/tears-of-ashan@vcmi-1.7
+    vcmi-mods/alternate-townscreens@vcmi-1.7
+    vcmi-mods/lotrd-townscreens@vcmi-1.7
+    vcmi-mods/the-lost-tales@vcmi-1.7
   
   WORKFLOW_FILES: |
     .github=./
