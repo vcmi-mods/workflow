@@ -153,7 +153,7 @@ jobs:
           git config user.email github-actions@github.com
 
           git tag -f "${RELEASE_TAG}" "${GITHUB_SHA}"
-          git push origin "${GITHUB_REF_NAME}" --force
+          git push origin "${RELEASE_TAG}" --force
 
       - name: Upload Mod Release Package
         uses: ncipollo/release-action@v1
