@@ -25,7 +25,7 @@ def process_all_json_files():
 		if str(path).startswith("./.git") or not path.is_file():
 			continue
 		if "translation" in path.parts:
-			continue	
+			continue
 		print(f"Postprocessing: {path}")
 		fix_colon_spacing(path)
 
