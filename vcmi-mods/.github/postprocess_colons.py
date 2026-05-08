@@ -23,7 +23,9 @@ def fix_colon_spacing(file_path: Path):
 def process_all_json_files():
 	for path in Path(".").rglob("*.json"):
 		if str(path).startswith("./.git") or not path.is_file():
-			continue
+			continue	
+		if "translation" in path.parts:
+			continue	
 		print(f"Postprocessing: {path}")
 		fix_colon_spacing(path)
 
