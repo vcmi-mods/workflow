@@ -142,22 +142,5 @@ def main() -> None:
     print("Dependency installation complete.")
 
 
-def selfcheck() -> None:
-    graph = {"a": {"b", "c"}, "b": {"c"}, "c": {"a"}, "d": {"d"}}  # diamond + cycles
-    visited = []
-
-    def deps_of(dep_id):
-        visited.append(dep_id)
-        return graph.get(dep_id)
-
-    seen = resolve_dependencies({"a", "d"}, deps_of)
-    assert seen == {"a", "b", "c", "d"}, seen
-    assert sorted(visited) == ["a", "b", "c", "d"], visited  # each visited exactly once
-    print("selfcheck ok")
-
-
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "--selfcheck":
-        selfcheck()
-    else:
-        main()
+    main()

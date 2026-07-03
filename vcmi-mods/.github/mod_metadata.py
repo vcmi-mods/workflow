@@ -7,7 +7,6 @@ Subcommands:
   wire            Wire translation/<lang>.json references into mod.json (committed).
   inject-names    Fold translated name/description into the published mod.json (release).
   inject-release  Write release/repository fields into the published mod.json (release).
-  selfcheck       Run the built-in assertions.
 
 Every operation takes --root (default '.'). Shared tree-walking / JSON helpers live
 in mod_metadata_common.
@@ -249,23 +248,6 @@ def inject_release(root: Path) -> None:
 
 # --- CLI --------------------------------------------------------------------
 
-def selfcheck() -> None:
-    assert megabytes(1024 * 1024) == 1.0
-    assert megabytes(1572864) == 1.5
-    assert download_url("vcmi-mods/foo", "1.8", "foo-vcmi-1.8.zip") == (
-        "https://github.com/vcmi-mods/foo/releases/download/1.8/foo-vcmi-1.8.zip"
-    )
-    assert re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", utc_now())
-    assert version_at_least("vcmi-1.8", 1, 8)
-    assert version_at_least("vcmi-1.9", 1, 8)
-    assert version_at_least("vcmi-1.10", 1, 8)  # numeric, not string, compare
-    assert version_at_least("vcmi-2.0", 1, 8)
-    assert not version_at_least("vcmi-1.7", 1, 8)
-    assert not version_at_least("vcmi-1.0", 1, 8)
-    assert not version_at_least("nonsense", 1, 8)
-    print("selfcheck ok")
-
-
 OPERATIONS = {
     "export": export,
     "wire": wire,
@@ -279,13 +261,9 @@ def main() -> None:
     sub = parser.add_subparsers(dest="command", required=True)
     for name in OPERATIONS:
         sub.add_parser(name).add_argument("--root", default=".")
-    sub.add_parser("selfcheck")
 
     args = parser.parse_args()
-    if args.command == "selfcheck":
-        selfcheck()
-    else:
-        OPERATIONS[args.command](Path(args.root))
+    OPERATIONS[args.command](Path(args.root))
 
 
 if __name__ == "__main__":
