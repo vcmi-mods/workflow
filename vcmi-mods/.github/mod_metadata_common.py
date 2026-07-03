@@ -21,6 +21,7 @@ The top-level mod has no segments. Metadata keys are:
   mod.<sub>.<sub2>.name / ...                (nested)
 """
 
+import json
 import jstyleson
 from pathlib import Path
 from typing import Optional
@@ -106,6 +107,37 @@ def metadata_key(segments, field: str) -> str:
 def load_jsonc(path: Path) -> dict:
     """Load JSON-with-comments (mod.json) or strict JSON (translation files)."""
     return jstyleson.loads(path.read_text(encoding="utf-8"))
+
+
+def write_json(path: Path, data) -> None:
+    """Write data as UTF-8 JSON: 4-space indent, trailing newline."""
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=4) + "\n", encoding="utf-8")
+
+
+def find_files_ci(root: Path, filename: str) -> list:
+    """Recursively find every file named `filename` (case-insensitive), sorted by path."""
+    lowered = filename.lower()
+    return sorted(
+        (p for p in root.rglob("*") if p.is_file() and p.name.lower() == lowered),
+        key=lambda p: p.as_posix().lower(),
+    )
+
+
+def iter_language_files(mod_dir: Path, include_english: bool = False):
+    """Yield (language, path) for each <lang>.json in the mod's translation dir, lang in LANGUAGES."""
+    tdir = translation_dir(mod_dir)
+    if tdir is None:
+        return
+    for entry in sorted(tdir.iterdir(), key=lambda p: p.name.lower()):
+        lower = entry.name.lower()
+        if not lower.endswith(".json"):
+            continue
+        language = lower[: -len(".json")]
+        if language not in LANGUAGES:
+            continue
+        if language == "english" and not include_english:
+            continue
+        yield language, entry
 
 
 def detect_language(heading: str) -> Optional[str]:

@@ -10,12 +10,11 @@ from pathlib import Path
 from typing import List
 
 import wire_translations
-from mod_metadata_common import LANGUAGES
+from mod_metadata_common import LANGUAGES, find_files_ci
 
 
 def find_english_dirs(root: Path) -> List[Path]:
-    # rglob is case-sensitive; match english.json regardless of case.
-    return [p.parent for p in root.rglob("*") if p.is_file() and p.name.lower() == "english.json"]
+    return [p.parent for p in find_files_ci(root, "english.json")]
 
 
 def ensure_lang_files(dirs: List[Path], lang: str) -> None:

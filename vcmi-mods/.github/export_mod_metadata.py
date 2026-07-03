@@ -18,7 +18,6 @@ Usage: export_mod_metadata.py [--root .]
 """
 
 import argparse
-import json
 from pathlib import Path
 
 from mod_metadata_common import (
@@ -28,6 +27,7 @@ from mod_metadata_common import (
     metadata_key,
     mod_json_path,
     translation_dir,
+    write_json,
 )
 
 
@@ -60,9 +60,7 @@ def run(root: Path) -> None:
                 strings[metadata_key(segments, "description")] = description
 
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(
-        json.dumps(strings, ensure_ascii=False, indent=4) + "\n", encoding="utf-8"
-    )
+    write_json(target, strings)
     print(f"wrote {len(strings)} entries to {target}")
 
 

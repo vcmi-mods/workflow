@@ -2,21 +2,13 @@
 """Install dependencies for a VCMI mod from the vcmi-mods-repository."""
 
 import json
-import os
 import sys
 import urllib.request
 import zipfile
 import tempfile
-import jstyleson
 from pathlib import Path
 
-
-def find_mod_json_files(root: Path) -> list:
-    """Find every mod.json below root (case-insensitive)."""
-    return sorted(
-        (path for path in root.rglob("*") if path.is_file() and path.name.lower() == "mod.json"),
-        key=lambda path: path.as_posix().lower(),
-    )
+from mod_metadata_common import find_files_ci, load_jsonc
 
 
 def iter_depends_values(data):
@@ -35,20 +27,18 @@ def normalize_dependency_ids(depends_value) -> set:
     """Return package ids referenced by a depends value."""
     if isinstance(depends_value, str):
         return {depends_value.split(".")[0]}
-    if isinstance(depends_value, list):
-        return {dep.split(".")[0] for dep in depends_value if isinstance(dep, str)}
-    if isinstance(depends_value, dict):
+    # A list yields its items; a dict yields its keys - both are dependency ids.
+    if isinstance(depends_value, (list, dict)):
         return {dep.split(".")[0] for dep in depends_value if isinstance(dep, str)}
     return set()
 
 
 def collect_dependencies(root: Path) -> set:
     deps = set()
-    mod_files = find_mod_json_files(root)
+    mod_files = find_files_ci(root, "mod.json")
     print(f"Scanning {len(mod_files)} mod.json file(s) under {root} ...")
     for mod_file in mod_files:
-        with open(mod_file) as f:
-            data = jstyleson.load(f)
+        data = load_jsonc(mod_file)
         file_deps = set()
         for depends_value in iter_depends_values(data):
             file_deps.update(normalize_dependency_ids(depends_value))

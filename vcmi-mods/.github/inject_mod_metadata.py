@@ -21,17 +21,17 @@ Usage: inject_mod_metadata.py [--root .]
 """
 
 import argparse
-import json
 from pathlib import Path
 
 from mod_metadata_common import (
     LANGUAGES,
     description_md,
     find_mods,
+    iter_language_files,
     load_jsonc,
     metadata_key,
     mod_json_path,
-    translation_dir,
+    write_json,
 )
 
 
@@ -41,16 +41,7 @@ def read_md(path: Path) -> str:
 
 def load_translations(root: Path) -> dict:
     """Load every top-level content/translation/<lang>.json keyed by language."""
-    tdir = translation_dir(root)
-    translations = {}
-    if tdir is not None:
-        for entry in tdir.iterdir():
-            lower = entry.name.lower()
-            if lower.endswith(".json"):
-                language = lower[: -len(".json")]
-                if language in LANGUAGES:
-                    translations[language] = load_jsonc(entry)
-    return translations
+    return {lang: load_jsonc(path) for lang, path in iter_language_files(root, include_english=True)}
 
 
 def inject_mod(mod_dir: Path, segments, translations: dict) -> None:
@@ -87,9 +78,7 @@ def inject_mod(mod_dir: Path, segments, translations: dict) -> None:
             config[language] = block
 
     if changed:
-        mod_json_path(mod_dir).write_text(
-            json.dumps(config, ensure_ascii=False, indent=4) + "\n", encoding="utf-8"
-        )
+        write_json(mod_json_path(mod_dir), config)
         print(f"injected metadata into {mod_json_path(mod_dir)}")
 
 

@@ -21,7 +21,7 @@ import argparse
 import json
 from pathlib import Path
 
-from mod_metadata_common import LANGUAGES, find_mods, load_jsonc, mod_json_path, translation_dir
+from mod_metadata_common import find_mods, iter_language_files, load_jsonc, mod_json_path
 
 
 def wire_mod(mod_dir: Path) -> None:
@@ -31,19 +31,8 @@ def wire_mod(mod_dir: Path) -> None:
     if config.get("modType") == "Translation":
         return
 
-    tdir = translation_dir(mod_dir)
-    if tdir is None:
-        return
-
     changed = False
-    for entry in sorted(tdir.iterdir(), key=lambda p: p.name.lower()):
-        lower = entry.name.lower()
-        if not lower.endswith(".json") or lower == "english.json":
-            continue
-        language = lower[: -len(".json")]
-        if language not in LANGUAGES:
-            continue
-
+    for language, _entry in iter_language_files(mod_dir):
         block = config.get(language)
         if not isinstance(block, dict):
             block = {}

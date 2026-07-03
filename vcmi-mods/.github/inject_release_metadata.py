@@ -21,13 +21,12 @@ Usage: inject_release_metadata.py [--root .]
 """
 
 import argparse
-import json
 import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-from mod_metadata_common import child_ci, load_jsonc, mod_json_path
+from mod_metadata_common import child_ci, load_jsonc, mod_json_path, write_json
 
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp"}
 
@@ -91,9 +90,7 @@ def run(root: Path) -> None:
     if stars.isdigit():
         config["githubStars"] = int(stars)
 
-    mod_json_path(root).write_text(
-        json.dumps(config, ensure_ascii=False, indent=4) + "\n", encoding="utf-8"
-    )
+    write_json(mod_json_path(root), config)
     print(f"wrote release metadata into {mod_json_path(root)}")
 
 
