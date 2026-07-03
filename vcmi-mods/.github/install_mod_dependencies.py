@@ -83,6 +83,27 @@ def download_and_install(dep_id: str, download_url: str, install_dir: Path) -> N
     print(f"  {dep_id}: installed to {dest}")
 
 
+def resolve_dependencies(direct: set, deps_of) -> set:
+    """
+    Breadth-first walk over the dependency graph, calling deps_of(id) once per mod.
+
+    deps_of(id) installs the mod and returns its own dependencies (a set), or None
+    when the mod is unavailable. Cycles terminate because each id is visited once.
+    Returns the set of visited ids.
+    """
+    seen = set()
+    queue = sorted(direct)
+    while queue:
+        dep_id = queue.pop(0)
+        if dep_id in seen:
+            continue
+        seen.add(dep_id)
+        children = deps_of(dep_id)
+        if children:
+            queue.extend(sorted(c for c in children if c not in seen))
+    return seen
+
+
 def main() -> None:
     if len(sys.argv) < 2:
         print("Usage: install_mod_dependencies.py <branch> [install_dir] [root]", file=sys.stderr)
@@ -107,26 +128,46 @@ def main() -> None:
 
     available_mods = repo.get("availableMods", {})
 
-    deps = collect_dependencies(root)
-    if not deps:
+    direct = collect_dependencies(root)
+    if not direct:
         print("No dependencies found.")
         return
 
-    print(f"Found dependencies: {', '.join(sorted(deps))}")
+    print(f"Direct dependencies: {', '.join(sorted(direct))}")
     install_dir.mkdir(parents=True, exist_ok=True)
 
-    for dep_id in sorted(deps):
+    def deps_of(dep_id: str):
         if dep_id not in available_mods:
             print(f"  {dep_id}: not found in repository, skipping")
-            continue
+            return None
         download_url = available_mods[dep_id].get("download")
         if not download_url:
             print(f"  {dep_id}: no download URL, skipping")
-            continue
+            return None
         download_and_install(dep_id, download_url, install_dir)
+        # Recurse into the installed mod so its own dependencies are pulled in too.
+        return collect_dependencies(install_dir / dep_id)
 
+    resolve_dependencies(direct, deps_of)
     print("Dependency installation complete.")
 
 
+def selfcheck() -> None:
+    graph = {"a": {"b", "c"}, "b": {"c"}, "c": {"a"}, "d": {"d"}}  # diamond + cycles
+    visited = []
+
+    def deps_of(dep_id):
+        visited.append(dep_id)
+        return graph.get(dep_id)
+
+    seen = resolve_dependencies({"a", "d"}, deps_of)
+    assert seen == {"a", "b", "c", "d"}, seen
+    assert sorted(visited) == ["a", "b", "c", "d"], visited  # each visited exactly once
+    print("selfcheck ok")
+
+
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1 and sys.argv[1] == "--selfcheck":
+        selfcheck()
+    else:
+        main()
