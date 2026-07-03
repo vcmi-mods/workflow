@@ -3,9 +3,9 @@
 Shared helpers for mod metadata (name / description) translation handling.
 
 Used by:
+  - mod_metadata.py         (export / wire / inject-names / inject-release operations)
+  - add_translations.py     (scaffold a new language, then wire it in)
   - migrate_description.py  (one-time split of legacy description.md -> description/<lang>.md)
-  - export_mod_metadata.py  (write mod.<id>.name / .description keys into Weblate source english.json)
-  - inject_mod_metadata.py  (fold translated name/description into published mod.json at release time)
 
 Mod layout (case-insensitive on disk, VCMI is case-insensitive):
   <root>/mod.json                       top-level mod

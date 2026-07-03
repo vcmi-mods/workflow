@@ -134,10 +134,10 @@ jobs:
         run: python3 .github/migrate_description.py
 
       - name: Export mod metadata to Weblate source
-        run: python3 .github/export_mod_metadata.py
+        run: python3 .github/mod_metadata.py export
 
       - name: Wire up translation files in mod.json
-        run: python3 .github/wire_translations.py
+        run: python3 .github/mod_metadata.py wire
 
       # Format after generation so the committed mod.json is already normalized and
       # does not churn on the next run. Push-only: PRs are validated, not committed.
@@ -233,7 +233,7 @@ jobs:
       # Fold translated name/description into the published mod.json. Must run before
       # content/ is zipped away, since it reads content/translation/<lang>.json.
       - name: Inject mod metadata into published mod.json
-        run: python3 .github/inject_mod_metadata.py
+        run: python3 .github/mod_metadata.py inject-names
 
       - name: Prepare content ZIPs
         run: bash .github/create_content_zip.sh
@@ -246,7 +246,7 @@ jobs:
         env:
           GITHUB_STARS: ${{ github.event.repository.stargazers_count }}
           GITHUB_SHA: ${{ env.RELEASE_SHA }}
-        run: python3 .github/inject_release_metadata.py
+        run: python3 .github/mod_metadata.py inject-release
 
       - name: Strip vcmi- prefix for TAG
         run: echo "RELEASE_TAG=${GITHUB_REF_NAME#vcmi-}" >> $GITHUB_ENV

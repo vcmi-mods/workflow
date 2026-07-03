@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Scaffold a new translation language: create an empty <lang>.json next to every
-english.json, then wire the language into each mod.json via wire_translations.
+english.json, then wire the language into each mod.json via mod_metadata.wire.
 """
 
 import argparse
@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 from typing import List
 
-import wire_translations
+import mod_metadata
 from mod_metadata_common import LANGUAGES, find_files_ci
 
 
@@ -45,7 +45,7 @@ def main():
 
     ensure_lang_files(english_dirs, lang)
     # Reuse the canonical wiring so mod.json entries match the CI exactly.
-    wire_translations.run(root)
+    mod_metadata.wire(root)
     print(f"Processed {len(english_dirs)} directories; ensured {lang}.json where missing.")
 
 
