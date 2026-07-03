@@ -23,6 +23,7 @@ Usage: inject_release_metadata.py [--root .]
 import argparse
 import json
 import os
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -54,6 +55,14 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def version_at_least(ref_name: str, major: int, minor: int) -> bool:
+    """True if ref_name is vcmi-<major>.<minor> or newer (numeric compare, so 1.10 > 1.8)."""
+    match = re.match(r"vcmi-(\d+)\.(\d+)", ref_name)
+    if match is None:
+        return False
+    return (int(match.group(1)), int(match.group(2))) >= (major, minor)
+
+
 def run(root: Path) -> None:
     repository = os.environ["GITHUB_REPOSITORY"]          # owner/repo
     ref_name = os.environ["GITHUB_REF_NAME"]              # vcmi-1.8
@@ -67,7 +76,12 @@ def run(root: Path) -> None:
 
     config["download"] = download_url(repository, tag, asset)
     config["downloadSize"] = megabytes(zip_path.stat().st_size)
-    config["updateDate"] = utc_now()
+
+    # updateDate is a 1.8+ feature; 1.7 and older releases omit it.
+    if version_at_least(ref_name, 1, 8):
+        config["updateDate"] = utc_now()
+    else:
+        config.pop("updateDate", None)
 
     screenshots = screenshot_urls(root, repository, sha)
     if screenshots:
@@ -89,8 +103,14 @@ def selfcheck() -> None:
     assert download_url("vcmi-mods/foo", "1.8", "foo-vcmi-1.8.zip") == (
         "https://github.com/vcmi-mods/foo/releases/download/1.8/foo-vcmi-1.8.zip"
     )
-    import re
     assert re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", utc_now())
+    assert version_at_least("vcmi-1.8", 1, 8)
+    assert version_at_least("vcmi-1.9", 1, 8)
+    assert version_at_least("vcmi-1.10", 1, 8)  # numeric, not string, compare
+    assert version_at_least("vcmi-2.0", 1, 8)
+    assert not version_at_least("vcmi-1.7", 1, 8)
+    assert not version_at_least("vcmi-1.0", 1, 8)
+    assert not version_at_least("nonsense", 1, 8)
     print("selfcheck ok")
 
 
