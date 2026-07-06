@@ -111,7 +111,7 @@ def load_jsonc(path: Path) -> dict:
 
 def write_json(path: Path, data) -> None:
     """Write data as UTF-8 JSON: 4-space indent, trailing newline."""
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=4) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(data, ensure_ascii=False, indent="\t", separators=(',', ' : ')) + "\n", encoding="utf-8")
 
 
 def find_files_ci(root: Path, filename: str) -> list:

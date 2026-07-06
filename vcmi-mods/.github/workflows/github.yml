@@ -203,7 +203,6 @@ jobs:
         !cancelled() &&
         needs.validate-startup.result != 'skipped' &&
         github.event_name != 'pull_request' &&
-        github.repository_owner == 'vcmi-mods' &&
         startsWith(github.ref_name, 'vcmi-')
       }}
     runs-on: ubuntu-latest
