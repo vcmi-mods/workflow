@@ -73,6 +73,11 @@ def export(root: Path) -> None:
     for mod_dir, segments in find_mods(root):
         config = load_jsonc(mod_json_path(mod_dir))
 
+        # Translation mods are single-language and hand-edited; they have no english
+        # Weblate source, so don't export (nor conjure an english.json for) them.
+        if config.get("modType") == "Translation":
+            continue
+
         name = config.get("name")
         if isinstance(name, str) and name:
             strings[metadata_key(segments, "name")] = name
@@ -82,6 +87,11 @@ def export(root: Path) -> None:
             description = config.get("description")
             if isinstance(description, str) and description:
                 strings[metadata_key(segments, "description")] = description
+
+    # Nothing to export (e.g. a Translation-only repo) - don't create an empty source.
+    if not strings and not target.exists():
+        print("no metadata to export")
+        return
 
     target.parent.mkdir(parents=True, exist_ok=True)
     write_json(target, strings)
