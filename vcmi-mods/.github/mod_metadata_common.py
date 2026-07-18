@@ -110,7 +110,7 @@ def load_jsonc(path: Path) -> dict:
 
 
 def write_json(path: Path, data) -> None:
-    """Write data as UTF-8 JSON: 4-space indent, trailing newline."""
+    """Write data as UTF-8 JSON: tab indent, " : " separators, trailing newline."""
     path.write_text(json.dumps(data, ensure_ascii=False, indent="\t", separators=(',', ' : ')) + "\n", encoding="utf-8")
 
 
