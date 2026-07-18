@@ -133,6 +133,12 @@ jobs:
       - name: Migrate legacy mod descriptions
         run: python3 .github/migrate_description.py
 
+      # TEMPORARY: seed translation/<lang>.json from per-language name/description
+      # blocks already in mod.json. Remove this step (and migrate_translations.py)
+      # once all mods have migrated. Runs before wire so new <lang>.json get wired.
+      - name: Migrate legacy mod name/description translations
+        run: python3 .github/migrate_translations.py
+
       - name: Export mod metadata to Weblate source
         run: python3 .github/mod_metadata.py export
 

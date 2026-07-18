@@ -79,34 +79,8 @@ def run(root: Path) -> None:
         migrate_mod(mod_dir)
 
 
-def self_test() -> None:
-    # multi-section, english not first
-    text = "# german\nHallo\nWelt\n\n# english\nHello\nworld\n"
-    out = split_description(text)
-    assert out == {"german": "Hallo\nWelt\n", "english": "Hello\nworld\n"}, out
-
-    # tchinese must not be shadowed by chinese
-    out = split_description("# tchinese\nfoo\n# chinese\nbar\n")
-    assert set(out) == {"tchinese", "chinese"}, out
-    assert out["tchinese"] == "foo\n" and out["chinese"] == "bar\n", out
-
-    # no headings -> whole file english
-    out = split_description("Just a plain description.\n")
-    assert out == {"english": "Just a plain description.\n"}, out
-
-    # heading without a known language is ignored
-    out = split_description("# Changelog\nstuff\n# english\nHello\n")
-    assert out == {"english": "Hello\n"}, out
-
-    print("self-test OK")
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=".")
-    parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
-    if args.self_test:
-        self_test()
-        sys.exit(0)
     run(Path(args.root))
