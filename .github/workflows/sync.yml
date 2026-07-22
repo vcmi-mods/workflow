@@ -20,33 +20,33 @@ env:
     vcmi-mods/czech-translation@vcmi-1.7
     vcmi-mods/vietnamese-translation@vcmi-1.7
     vcmi-mods/tears-of-ashan@vcmi-1.7
-    vcmi-mods/alternate-townscreens@vcmi-1.7
-    vcmi-mods/lotrd-townscreens@vcmi-1.7
-    vcmi-mods/the-lost-tales@vcmi-1.7
-    vcmi-mods/h3landscape@vcmi-1.7
-    vcmi-mods/new-interface-mod@vcmi-1.7
-    vcmi-mods/reinforcements-spell@vcmi-1.7
-    vcmi-mods/an-expansion@vcmi-1.7
-    vcmi-mods/tartarus-town@vcmi-1.7
-    vcmi-mods/new-pavilion@vcmi-1.7
-    vcmi-mods/ruins-town@vcmi-1.7
-    vcmi-mods/newtown-terrains@vcmi-1.7
-    vcmi-mods/forge@vcmi-1.7
-    vcmi-mods/forge2k@vcmi-1.7
-    vcmi-mods/asphalt-terrain@vcmi-1.7
-    vcmi-mods/hirki-plus-patch@vcmi-1.7
-    vcmi-mods/market-of-time@vcmi-1.7
-    vcmi-mods/new-old-spells-plus@vcmi-1.7
-    vcmi-mods/ab-bad-ending-assets@vcmi-1.7
-    vcmi-mods/new-monsters-pack@vcmi-1.7
-    vcmi-mods/haven-town@vcmi-1.7
-    vcmi-mods/refugee-town@vcmi-1.7
-    vcmi-mods/preserve-town@vcmi-1.7
-    vcmi-mods/vcmi-extras@vcmi-1.8
-    vcmi-mods/horn-of-the-abyss@vcmi-1.8
-    vcmi-mods/new-pavilion@vcmi-1.8
-    vcmi-mods/newtown-terrains@vcmi-1.8
-    vcmi-mods/sylvan-town@vcmi-1.8
+#    vcmi-mods/alternate-townscreens@vcmi-1.7
+#    vcmi-mods/lotrd-townscreens@vcmi-1.7
+#    vcmi-mods/the-lost-tales@vcmi-1.7
+#    vcmi-mods/h3landscape@vcmi-1.7
+#    vcmi-mods/new-interface-mod@vcmi-1.7
+#    vcmi-mods/reinforcements-spell@vcmi-1.7
+#    vcmi-mods/an-expansion@vcmi-1.7
+#    vcmi-mods/tartarus-town@vcmi-1.7
+#    vcmi-mods/new-pavilion@vcmi-1.7
+#    vcmi-mods/ruins-town@vcmi-1.7
+#    vcmi-mods/newtown-terrains@vcmi-1.7
+#    vcmi-mods/forge@vcmi-1.7
+#    vcmi-mods/forge2k@vcmi-1.7
+#    vcmi-mods/asphalt-terrain@vcmi-1.7
+#    vcmi-mods/hirki-plus-patch@vcmi-1.7
+#    vcmi-mods/market-of-time@vcmi-1.7
+#    vcmi-mods/new-old-spells-plus@vcmi-1.7
+#    vcmi-mods/ab-bad-ending-assets@vcmi-1.7
+#    vcmi-mods/new-monsters-pack@vcmi-1.7
+#    vcmi-mods/haven-town@vcmi-1.7
+#    vcmi-mods/refugee-town@vcmi-1.7
+#    vcmi-mods/preserve-town@vcmi-1.7
+#    vcmi-mods/vcmi-extras@vcmi-1.8
+#    vcmi-mods/horn-of-the-abyss@vcmi-1.8
+#    vcmi-mods/new-pavilion@vcmi-1.8
+#    vcmi-mods/newtown-terrains@vcmi-1.8
+#    vcmi-mods/sylvan-town@vcmi-1.8
   
   # Source ".github" resolves to vcmi-mods/.github, NOT this repo's own ./.github.
   # The sync action checks "<owner>/.github" before a bare ".github", and every
