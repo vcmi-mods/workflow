@@ -194,9 +194,10 @@ jobs:
         with:
           default_author: github_actions
           message: "Update generated translations and metadata"
-          add: |
-            *.json
-            *.md
+          # JSON array (not a multiline string) so add-and-commit runs a separate
+          # git add per glob. A single atomic `git add *.json *.md` aborts entirely
+          # when a repo has no .md files, silently dropping the generated *.json too.
+          add: '["*.json", "*.md"]'
 
   package-artifact:
     name: Create release
