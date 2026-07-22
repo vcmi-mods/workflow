@@ -82,7 +82,9 @@ jobs:
           if [[ "${{ github.repository }}" == *"horn-of-the-abyss"* ]]; then
             MOD_NAME="hota"
           fi
-          echo "MOD_NAME=${MOD_NAME}" >> $GITHUB_ENV
+          # VCMI mod IDs are lower-case; a mixed-case repo name (e.g. HD-remastered)
+          # would not match the mod VCMI loaded from the (lower-cased) folder.
+          echo "MOD_NAME=${MOD_NAME,,}" >> $GITHUB_ENV
 
       - name: Install Mod
         if: env.VCMI_VERSION != ''
