@@ -43,6 +43,31 @@ env:
     vcmi-mods/refugee-town@vcmi-1.7
     vcmi-mods/preserve-town@vcmi-1.7
     vcmi-mods/highlands-town@vcmi-1.7
+    vcmi-mods/belarusian-translation@vcmi-1.7
+    vcmi-mods/bulgarian-translation@vcmi-1.7
+    vcmi-mods/chinese-translation@vcmi-1.7
+    vcmi-mods/dutch-translation@vcmi-1.7
+    vcmi-mods/filipino-translation@vcmi-1.7
+    vcmi-mods/finnish-translation@vcmi-1.7
+    vcmi-mods/french-translation@vcmi-1.7
+    vcmi-mods/german-translation@vcmi-1.7
+    vcmi-mods/greek-translation@vcmi-1.7
+    vcmi-mods/h3-for-vcmi-englisation@vcmi-1.7
+    vcmi-mods/hungarian-translation@vcmi-1.7
+    vcmi-mods/italian-translation@vcmi-1.7
+    vcmi-mods/japanese-translation@vcmi-1.7
+    vcmi-mods/korean-translation@vcmi-1.7
+    vcmi-mods/latvian-translation@vcmi-1.7
+    vcmi-mods/mega-pack-rus@vcmi-1.7
+    vcmi-mods/norwegian-translation@vcmi-1.7
+    vcmi-mods/polish-translation@vcmi-1.7
+    vcmi-mods/portuguese-translation@vcmi-1.7
+    vcmi-mods/romanian-translation@vcmi-1.7
+    vcmi-mods/serbian-translation@vcmi-1.7
+    vcmi-mods/spanish-translation@vcmi-1.7
+    vcmi-mods/swedish-translation@vcmi-1.7
+    vcmi-mods/turkish-translation@vcmi-1.7
+    vcmi-mods/vcmi-mod-ce-ukr@vcmi-1.7
     vcmi-mods/vcmi-extras@vcmi-1.8
     vcmi-mods/horn-of-the-abyss@vcmi-1.8
     vcmi-mods/new-pavilion@vcmi-1.8
