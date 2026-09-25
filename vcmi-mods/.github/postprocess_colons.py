@@ -4,6 +4,8 @@ import re
 import sys
 from pathlib import Path
 
+from mod_metadata_common import iter_formattable_json
+
 # Anchored at the start of the line so only the key is matched. An unanchored
 # pattern also matches a quoted phrase inside a value and corrupts translated
 # text like: from "the Angelic Alliance": "the Sword of Judgement".
@@ -27,11 +29,7 @@ def fix_colon_spacing(file_path: Path):
 			f.write(line)
 
 def process_all_json_files():
-	for path in Path(".").rglob("*.json"):
-		if str(path).startswith("./.git") or not path.is_file():
-			continue
-		if any(part.lower() == "translation" for part in path.parts):
-			continue
+	for path in iter_formattable_json(Path(".")):
 		print(f"Postprocessing: {path}")
 		fix_colon_spacing(path)
 
