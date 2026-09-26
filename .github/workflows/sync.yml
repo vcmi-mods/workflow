@@ -68,6 +68,15 @@ env:
     vcmi-mods/swedish-translation@vcmi-1.7
     vcmi-mods/turkish-translation@vcmi-1.7
     vcmi-mods/vcmi-mod-ce-ukr@vcmi-1.7
+    vcmi-mods/cathedral-town@vcmi-1.7
+    vcmi-mods/courtyard@vcmi-1.7
+    vcmi-mods/heroes-o-pedia@vcmi-1.7
+    vcmi-mods/more-secondary@vcmi-1.7
+    vcmi-mods/andruids-expansion@vcmi-1.7
+    vcmi-mods/abyss-town@vcmi-1.7
+    vcmi-mods/witchking-artifacts@vcmi-1.7
+    vcmi-mods/ab-bad-ending-maps@vcmi-1.7
+    vcmi-mods/new-skills-pack@vcmi-1.7
     vcmi-mods/vcmi-extras@vcmi-1.8
     vcmi-mods/horn-of-the-abyss@vcmi-1.8
     vcmi-mods/new-pavilion@vcmi-1.8
