@@ -14,6 +14,7 @@ env:
     vcmi-mods/vcmi-extras@vcmi-1.7
     vcmi-mods/horn-of-the-abyss@vcmi-1.7
     vcmi-mods/tides-of-war@vcmi-1.7
+    vcmi-mods/tides-of-war@vcmi-1.8
     vcmi-mods/wake-of-gods@vcmi-1.7
     vcmi-mods/HD-remastered@vcmi-1.7
     vcmi-mods/small-era-mods@vcmi-1.7
@@ -28,19 +29,27 @@ env:
     vcmi-mods/reinforcements-spell@vcmi-1.7
     vcmi-mods/an-expansion@vcmi-1.7
     vcmi-mods/tartarus-town@vcmi-1.7
+    vcmi-mods/tartarus-town@vcmi-1.8
     vcmi-mods/new-pavilion@vcmi-1.7
     vcmi-mods/ruins-town@vcmi-1.7
+    vcmi-mods/ruins-town@vcmi-1.8
     vcmi-mods/newtown-terrains@vcmi-1.7
     vcmi-mods/forge@vcmi-1.7
+    vcmi-mods/forge@vcmi-1.8
     vcmi-mods/forge2k@vcmi-1.7
+    vcmi-mods/forge2k@vcmi-1.8
     vcmi-mods/asphalt-terrain@vcmi-1.7
+    vcmi-mods/asphalt-terrain@vcmi-1.8
     vcmi-mods/hirki-plus-patch@vcmi-1.7
     vcmi-mods/market-of-time@vcmi-1.7
     vcmi-mods/new-old-spells-plus@vcmi-1.7
+    vcmi-mods/new-old-spells-plus@vcmi-1.8
     vcmi-mods/ab-bad-ending-assets@vcmi-1.7
+    vcmi-mods/ab-bad-ending-assets@vcmi-1.8
     vcmi-mods/new-monsters-pack@vcmi-1.7
     vcmi-mods/haven-town@vcmi-1.7
     vcmi-mods/refugee-town@vcmi-1.7
+    vcmi-mods/refugee-town@vcmi-1.8
     vcmi-mods/preserve-town@vcmi-1.7
     vcmi-mods/highlands-town@vcmi-1.7
     vcmi-mods/belarusian-translation@vcmi-1.7
@@ -70,10 +79,12 @@ env:
     vcmi-mods/vcmi-mod-ce-ukr@vcmi-1.7
     vcmi-mods/cathedral-town@vcmi-1.7
     vcmi-mods/courtyard@vcmi-1.7
+    vcmi-mods/courtyard@vcmi-1.8
     vcmi-mods/heroes-o-pedia@vcmi-1.7
     vcmi-mods/more-secondary@vcmi-1.7
     vcmi-mods/andruids-expansion@vcmi-1.7
     vcmi-mods/abyss-town@vcmi-1.7
+    vcmi-mods/abyss-town@vcmi-1.8
     vcmi-mods/witchking-artifacts@vcmi-1.7
     vcmi-mods/ab-bad-ending-maps@vcmi-1.7
     vcmi-mods/new-skills-pack@vcmi-1.7
@@ -85,6 +96,7 @@ env:
     vcmi-mods/boost-ai@vcmi-1.7
     vcmi-mods/zefix@vcmi-1.7
     vcmi-mods/adventure-spells-pack@vcmi-1.7
+    vcmi-mods/adventure-spells-pack@vcmi-1.8
     vcmi-mods/fused-artifacts@vcmi-1.7
     vcmi-mods/cheat-mod@vcmi-1.7
     vcmi-mods/diverse-battlefields@vcmi-1.7
@@ -99,6 +111,8 @@ env:
     vcmi-mods/tchinese-translation@vcmi-1.8
     vcmi-mods/wake-of-gods@vcmi-1.8
     vcmi-mods/neutral-heroes@vcmi-1.8
+    vcmi-mods/creatures-hidden-potential@vcmi-1.8
+    vcmi-mods/custom-templates@vcmi-1.8
   
   # Source ".github" resolves to vcmi-mods/.github, NOT this repo's own ./.github.
   # The sync action checks "<owner>/.github" before a bare ".github", and every
