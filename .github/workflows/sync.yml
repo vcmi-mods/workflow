@@ -113,6 +113,21 @@ env:
     vcmi-mods/neutral-heroes@vcmi-1.8
     vcmi-mods/creatures-hidden-potential@vcmi-1.8
     vcmi-mods/custom-templates@vcmi-1.8
+    vcmi-mods/tears-of-ashan@vcmi-1.8
+    vcmi-mods/the-lost-tales@vcmi-1.8
+    vcmi-mods/reinforcements-spell@vcmi-1.8
+    vcmi-mods/hirki-plus-patch@vcmi-1.8
+    vcmi-mods/new-monsters-pack@vcmi-1.8
+    vcmi-mods/ensrick-portraits@vcmi-1.8
+    vcmi-mods/the-great-expansion@vcmi-1.8
+    vcmi-mods/new-summon-spells@vcmi-1.8
+    vcmi-mods/andruids-spell-balance@vcmi-1.8
+    vcmi-mods/reworked-commanders@vcmi-1.8
+    vcmi-mods/haven-town@vcmi-1.8
+    vcmi-mods/market-of-time@vcmi-1.8
+    vcmi-mods/campaign-heroes@vcmi-1.8
+    vcmi-mods/andruids-expansion@vcmi-1.8
+    vcmi-mods/new-skills-pack@vcmi-1.8
   
   # Source ".github" resolves to vcmi-mods/.github, NOT this repo's own ./.github.
   # The sync action checks "<owner>/.github" before a bare ".github", and every
